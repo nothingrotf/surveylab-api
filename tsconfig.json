@@ -4,6 +4,7 @@
     "module": "ESNext",
     "moduleResolution": "node",
     "target": "ES6",
+    "sourceMap": true,
     "lib": ["dom", "dom.iterable", "esnext"],
     "esModuleInterop": true,
     "allowJs": true,
