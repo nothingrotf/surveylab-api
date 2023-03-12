@@ -48,7 +48,7 @@ describe('SignUp Controller', () => {
     const { sut } = makeSut()
     const httpRequest = {
       body: {
-        email: 'any_email@mail.com',
+        email: 'any_mail.com',
         password: 'any_password',
         passwordConfirmation: 'any_password'
       }
@@ -79,7 +79,7 @@ describe('SignUp Controller', () => {
     const httpRequest = {
       body: {
         name: 'any_user',
-        email: 'any_email@mail.com',
+        email: 'any_mail.com',
         passwordConfirmation: 'any_password'
       }
     }
@@ -94,7 +94,7 @@ describe('SignUp Controller', () => {
     const httpRequest = {
       body: {
         name: 'any_user',
-        email: 'any_email@mail.com',
+        email: 'any_mail.com',
         password: 'any_password'
       }
     }
@@ -109,7 +109,7 @@ describe('SignUp Controller', () => {
     const httpRequest = {
       body: {
         name: 'any_user',
-        email: 'any_email@mail.com',
+        email: 'any_mail.com',
         password: 'any_password',
         passwordConfirmation: 'invalid_password'
       }
@@ -128,7 +128,7 @@ describe('SignUp Controller', () => {
     const httpRequest = {
       body: {
         name: 'any_user',
-        email: 'invalid_email@mail.com',
+        email: 'invalid_mail@mail.com',
         password: 'any_password',
         passwordConfirmation: 'any_password'
       }
@@ -147,14 +147,14 @@ describe('SignUp Controller', () => {
     const httpRequest = {
       body: {
         name: 'any_user',
-        email: 'any_email@mail.com',
+        email: 'any_mail.com',
         password: 'any_password',
         passwordConfirmation: 'any_password'
       }
     }
 
     sut.handle(httpRequest)
-    expect(emailIsValidSpy).toHaveBeenCalledWith('any_email@mail.com')
+    expect(emailIsValidSpy).toHaveBeenCalledWith('any_mail.com')
   })
 
   test('Should return status 500 if EmailValidator throws', () => {
@@ -167,7 +167,7 @@ describe('SignUp Controller', () => {
     const httpRequest = {
       body: {
         name: 'any_user',
-        email: 'any_email@mail.com',
+        email: 'any_mail.com',
         password: 'any_password',
         passwordConfirmation: 'any_password'
       }
@@ -188,7 +188,7 @@ describe('SignUp Controller', () => {
     const httpRequest = {
       body: {
         name: 'any_user',
-        email: 'any_email@mail.com',
+        email: 'any_mail.com',
         password: 'any_password',
         passwordConfirmation: 'any_password'
       }
@@ -207,7 +207,7 @@ describe('SignUp Controller', () => {
     const httpRequest = {
       body: {
         name: 'any_user',
-        email: 'any_email@mail.com',
+        email: 'any_mail.com',
         password: 'any_password',
         passwordConfirmation: 'any_password'
       }
@@ -216,8 +216,29 @@ describe('SignUp Controller', () => {
     sut.handle(httpRequest)
     expect(addSpy).toHaveBeenCalledWith({
       name: 'any_user',
-      email: 'any_email@mail.com',
+      email: 'any_mail.com',
       password: 'any_password'
+    })
+  })
+
+  test('Should return status 200 if valid data is provided', () => {
+    const { sut } = makeSut()
+    const httpRequest = {
+      body: {
+        name: 'valid_user',
+        email: 'valid_mail@mail.com',
+        password: 'valid_password',
+        passwordConfirmation: 'valid_password'
+      }
+    }
+
+    const httpResponse = sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toBe(200)
+    expect(httpResponse.body).toEqual({
+      id: 'valid_id',
+      name: 'valid_name',
+      email: 'valid_mail@mail.com',
+      password: 'valid_password'
     })
   })
 })
