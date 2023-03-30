@@ -1,13 +1,19 @@
 {
   "compilerOptions": {
-    "outDir": "./dist",
-    "module": "ESNext",
+    "outDir": "dist",
+    "module": "commonjs",
     "moduleResolution": "node",
-    "target": "ES6",
+    "target": "es2019",
     "sourceMap": true,
     "lib": ["dom", "dom.iterable", "esnext"],
     "esModuleInterop": true,
-    "allowJs": true,
     "strictNullChecks": true
-  }
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "**/*.spec.ts",
+    "**/*.test.ts"
+  ]
 }
