@@ -10,10 +10,10 @@ services:
       - "27017:27017"
   api:
     container_name: api-container
-    build: .
-    image: surveylab-api
+    image: node:18
     restart: always
-    command: npm run debug
+    working_dir: /usr/src/surveylab-api
+    command: bash -c "npm install && npm run debug"
     volumes:
       - ./dist:/usr/src/surveylab-api/dist
       - ./package.json:/usr/src/surveylab-api/package.json
