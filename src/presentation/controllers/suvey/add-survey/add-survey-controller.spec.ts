@@ -23,7 +23,7 @@ const makeFakeRequest = (): HttpRequest => {
   return {
     body: {
       question: 'any_question',
-      answer: [{
+      answers: [{
         image: 'any_image',
         answer: 'any_answer'
       }]
