@@ -40,7 +40,7 @@ interface SutTypes {
 const makeSut = (): SutTypes => {
   const validationStub = makeValidation()
   const addSurveyStub = makeAddSurvey()
-  const sut = new AddSurveyController(validationStub, addSurveyStub)
+  const sut = new AddSurveyController(addSurveyStub, validationStub)
 
   return { sut, validationStub, addSurveyStub }
 }
