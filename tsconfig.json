@@ -8,13 +8,13 @@
     "sourceMap": true,
     "lib": ["dom", "dom.iterable", "esnext"],
     "esModuleInterop": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["*"]
+    }
   },
   "include": [
     "src"
-  ],
-  "exclude": [
-    "**/*.spec.ts",
-    "**/*.test.ts"
   ]
 }
