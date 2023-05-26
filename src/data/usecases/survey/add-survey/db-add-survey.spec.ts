@@ -1,4 +1,4 @@
-import type { AddSurveyModel, AddSurveyRepository } from './db-add-account-protocols'
+import type { AddSurveyModel, AddSurveyRepository } from './db-add-survey-protocols'
 import { DbAddSurvey } from './db-add-survey'
 import MockDate from 'mockdate'
 
