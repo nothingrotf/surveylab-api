@@ -1,12 +1,12 @@
 import type { Collection } from 'mongodb'
-import type { AddSurveyModel } from '@/domain/usecases/survey/add-survey'
+import type { AddSurveyParams } from '@/domain/usecases/survey/add-survey'
 import { MongoHelper } from '../helpers/mongo-helper'
 import { SurveyMongoRepository } from './survey-mongo-repository'
 import MockDate from 'mockdate'
 
 let surveyCollection: Collection
 
-const makeFakeSurveyData = (): AddSurveyModel => ({
+const makeFakeSurveyData = (): AddSurveyParams => ({
   question: 'any_question',
   answers: [{
     image: 'any_image',
