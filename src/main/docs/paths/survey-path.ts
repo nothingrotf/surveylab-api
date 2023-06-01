@@ -4,15 +4,6 @@ export const surveyPath = {
       apiKeyAuth: []
     }],
     tags: ['Survey'],
-    requestBody: {
-      content: {
-        'application/json': {
-          schema: {
-            $ref: '#/schemas/loginParams'
-          }
-        }
-      }
-    },
     summary: 'List all surveys route',
     responses: {
       200: {
@@ -24,6 +15,39 @@ export const surveyPath = {
             }
           }
         }
+      },
+      403: {
+        $ref: '#/components/forbidden'
+      },
+      404: {
+        $ref: '#/components/notFound'
+      },
+      500: {
+        $ref: '#/components/serverError'
+      }
+    }
+  },
+  post: {
+    security: [{
+      apiKeyAuth: []
+    }],
+    tags: ['Survey'],
+    summary: 'create a new survey route',
+    requestBody: {
+      content: {
+        'application/json': {
+          schema: {
+            $ref: '#/schemas/addSurveyParams'
+          }
+        }
+      }
+    },
+    responses: {
+      204: {
+        description: 'Success'
+      },
+      400: {
+        $ref: '#/components/badRequest'
       },
       403: {
         $ref: '#/components/forbidden'
