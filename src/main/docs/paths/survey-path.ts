@@ -32,7 +32,7 @@ export const surveyPath = {
       apiKeyAuth: []
     }],
     tags: ['Survey'],
-    summary: 'create a new survey route',
+    summary: 'Create a new survey route',
     requestBody: {
       content: {
         'application/json': {
