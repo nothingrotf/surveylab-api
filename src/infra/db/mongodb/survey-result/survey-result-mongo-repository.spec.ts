@@ -1,4 +1,4 @@
-import type { Collection } from 'mongodb'
+import { type Collection, ObjectId } from 'mongodb'
 import { MongoHelper } from '../helpers/mongo-helper'
 import { SurveyResultMongoRepository } from './survey-result-mongo-repository'
 import MockDate from 'mockdate'
@@ -70,34 +70,35 @@ describe('Survey Result Mongo Repository', () => {
         date: new Date()
       })
       expect(surveyResult).toBeTruthy()
-      expect(surveyResult.id).toBeTruthy()
-      expect(surveyResult.answer).toBe(survey.answers[0].answer)
+      expect(surveyResult.surveyId).toEqual(survey.id)
+      expect(surveyResult.answers[0].count).toBe(1)
+      expect(surveyResult.answers[0].percent).toBe(100)
     })
-  })
 
-  test('Should update a survey result if its not new', async () => {
-    const survey = await makeSurvey()
-    const account = await makeAccount()
-    await surveyResultCollection.insertOne({
-      surveyId: survey.id,
-      accountId: account.id,
-      answer: survey.answers[0].answer,
-      date: new Date()
-    })
-    const sut = makeSut()
-    await sut.save({
-      surveyId: survey.id,
-      accountId: account.id,
-      answer: survey.answers[1].answer,
-      date: new Date()
-    })
-    const surveyResult = await surveyResultCollection
-      .find({
-        surveyId: survey.id,
-        accountId: account.id
+    test('Should update a survey result if its not new', async () => {
+      const survey = await makeSurvey()
+      const account = await makeAccount()
+      await surveyResultCollection.insertOne({
+        surveyId: new ObjectId(survey.id),
+        accountId: new ObjectId(account.id),
+        answer: survey.answers[0].answer,
+        date: new Date()
       })
-      .toArray()
-    expect(surveyResult).toBeTruthy()
-    expect(surveyResult.length).toBe(1)
+      const sut = makeSut()
+      await sut.save({
+        surveyId: survey.id,
+        accountId: account.id,
+        answer: survey.answers[1].answer,
+        date: new Date()
+      })
+      const surveyResult = await surveyResultCollection
+        .find({
+          surveyId: new ObjectId(survey.id),
+          accountId: new ObjectId(account.id)
+        })
+        .toArray()
+      expect(surveyResult).toBeTruthy()
+      expect(surveyResult.length).toBe(1)
+    })
   })
 })
