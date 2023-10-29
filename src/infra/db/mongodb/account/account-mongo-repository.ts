@@ -4,7 +4,7 @@ import type { LoadAccountByEmailRepository } from '@/data/protocols/db/account/l
 import type { UpdateAccessTokenRepository } from '@/data/protocols/db/account/update-access-token-repository'
 import type { AccountModel } from '@/domain/models/account'
 import type { AddAccountParams } from '@/domain/usecases/account/add-account'
-import { MongoHelper } from '../helpers/mongo-helper'
+import { MongoHelper } from '../helpers'
 import type { LoadAccountByTokenRepository } from '@/data/protocols/db/account/load-account-by-token-repository'
 
 export class AccountMongoRepository implements AddAccountRepository, LoadAccountByEmailRepository, UpdateAccessTokenRepository, LoadAccountByTokenRepository {

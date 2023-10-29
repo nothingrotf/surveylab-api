@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongodb'
 import type { AddSurveyParams } from '@/domain/usecases/survey/add-survey'
 import type { AddSurveyRepository } from '@/data/protocols/db/survey/add-survey-repository'
-import { MongoHelper } from '../helpers/mongo-helper'
+import { MongoHelper } from '../helpers'
 import type { LoadSurveysRepository } from '@/data/protocols/db/survey/load-surveys-repository'
 import type { SurveyModel } from '@/domain/models/survey'
 import type { LoadSurveyById } from '@/domain/usecases/survey/load-survey-by-id'

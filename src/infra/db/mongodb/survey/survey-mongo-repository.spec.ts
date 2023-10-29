@@ -1,5 +1,5 @@
 import type { Collection } from 'mongodb'
-import { MongoHelper } from '../helpers/mongo-helper'
+import { MongoHelper } from '../helpers'
 import { SurveyMongoRepository } from './survey-mongo-repository'
 import MockDate from 'mockdate'
 import { mockAddSurveyParams } from '@/domain/test'
