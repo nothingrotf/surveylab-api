@@ -1,5 +1,7 @@
+import type { Document } from 'mongodb'
+
 export class QueryBuilder {
-  private readonly query: any[] = []
+  private readonly query: Document[] = []
 
   match (data: object): QueryBuilder {
     this.query.push({
