@@ -1,4 +1,4 @@
-import type { SaveSurveyResultRepository } from '@/data/protocols/db/survey-result/save-survey-result-repository'
+import type { SaveSurveyResultRepository } from './db-save-survey-result-protocols'
 import { DbSaveSurveyResult } from './db-save-survey-result'
 import { mockSaveSurveyResultRepository } from '@/data/test'
 import { mockSaveSurveyResultParams, mockSurveyResultModel, throwError } from '@/domain/test'
