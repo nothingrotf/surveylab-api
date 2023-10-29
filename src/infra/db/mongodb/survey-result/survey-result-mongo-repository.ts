@@ -1,10 +1,11 @@
 import type { SurveyResultModel } from '@/domain/models/survey-result'
-import type { SaveSurveyResult, SaveSurveyResultParams } from '@/domain/usecases/survey-result/save-survey-result'
-import { MongoHelper } from '../helpers/mongo-helper'
+import type { SaveSurveyResultParams } from '@/domain/usecases/survey-result/save-survey-result'
+import type { LoadSurveyResultRepository } from '@/data/protocols/db/survey-result/load-survey-result-repository'
+import type { SaveSurveyResultRepository } from '@/data/protocols/db/survey-result/save-survey-result-repository'
+import { MongoHelper, QueryBuilder } from '../helpers'
 import { ObjectId } from 'mongodb'
-import { QueryBuilder } from '../helpers/query-builder'
 
-export class SurveyResultMongoRepository implements SaveSurveyResult {
+export class SurveyResultMongoRepository implements SaveSurveyResultRepository, LoadSurveyResultRepository {
   async save (data: SaveSurveyResultParams): Promise<SurveyResultModel> {
     const surveyResultCollection = await MongoHelper.getColletion('surveyResults')
     await surveyResultCollection.findOneAndUpdate({
@@ -18,11 +19,11 @@ export class SurveyResultMongoRepository implements SaveSurveyResult {
     }, {
       upsert: true
     })
-    const surveyResult = await this.loadBySurveyId(data.surveyId) as SurveyResultModel
+    const surveyResult = await this.loadBySurveyId(data.surveyId)
     return surveyResult
   }
 
-  private async loadBySurveyId (surveyId: string): Promise<SurveyResultModel | null> {
+  async loadBySurveyId (surveyId: string): Promise<SurveyResultModel> {
     const surveyResultCollection = await MongoHelper.getColletion('surveyResults')
     const query = new QueryBuilder()
       .match({
@@ -179,6 +180,6 @@ export class SurveyResultMongoRepository implements SaveSurveyResult {
       })
       .build()
     const surveyResult = await surveyResultCollection.aggregate(query).toArray()
-    return surveyResult?.length ? surveyResult[0] as SurveyResultModel : null
+    return surveyResult?.length ? surveyResult[0] as SurveyResultModel : null as unknown as SurveyResultModel
   }
 }
